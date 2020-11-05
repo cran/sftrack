@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title></title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore"><ol start="4" style="list-style-type: decimal">
+<li>Fantastic Groups and how to use them</li>
+</ol></h1>
+
+
+
+<p>Groupings are a big emphasis in <code>sftrack</code>. Structurally they are built with in the same vein as <code>sfc</code> and <code>sfg</code> classes in <code>sf</code>.</p>
+<p>To begin an <code>s_group</code> is a singular grouping. Its whats stored at the row level. A <code>c_grouping</code> is a collection of <code>s_groups</code> and exists at the column level. Groups also have an <code>active_group</code> argument, which turns on and off certain groups for analysis and plotting purposes.</p>
+<p>We start by looking at the structure of a <code>c_grouping</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;sftrack&quot;</span>)
+<span class="kw">data</span>(<span class="st">'raccoon'</span>, <span class="dt">package =</span> <span class="st">'sftrack'</span>)
+<span class="co">#raccoon &lt;- read.csv(system.file('extdata/raccoon_data.csv', package='sftrack'))</span>
+group_list =<span class="st"> </span><span class="kw">list</span>(<span class="dt">id =</span> raccoon$animal_id, <span class="dt">month =</span> <span class="kw">as.POSIXlt</span>(raccoon$timestamp)$mon<span class="dv">+1</span>)
+
+cg1 &lt;-<span class="st"> </span><span class="kw">make_c_grouping</span>(<span class="dt">x=</span>group_list, <span class="dt">active_group=</span><span class="kw">c</span>(<span class="st">'id'</span>,<span class="st">'month'</span>))
+<span class="kw">str</span>(cg1)</code></pre></div>
+<pre><code>## c_grouping object 
+## List of 445
+##  $ :List of 2
+##   ..$ id   : chr &quot;TTP-058&quot;
+##   .. [list output truncated]
+##   ..- attr(*, &quot;class&quot;)= chr &quot;s_group&quot;
+##   [list output truncated]
+##  - attr(*, &quot;active_group&quot;)= chr [1:2] &quot;id&quot; &quot;month&quot;
+##  - attr(*, &quot;sort_index&quot;)= Factor w/ 4 levels &quot;TTP-041_1&quot;,&quot;TTP-041_2&quot;,..: 3 3 3 3 3 3 3 3 3 3 ...</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cg1[[<span class="dv">1</span>]]</code></pre></div>
+<pre><code>## $id
+## [1] &quot;TTP-058&quot;
+## 
+## $month
+## [1] &quot;1&quot;</code></pre>
+<p>A grouping contains group related information. The <code>id</code> of the subject/sensor is the lowest level of grouping for the data. Any additional grouping variables are optional.</p>
+<p>A c_grouping is simply a collection of <code>s_group</code>s. The <code>s_group</code> is where the grouping data is stored, and can be modified at the row level. The <code>s_groups</code> main job is to store row level grouping information and maintain consistency of the grouping variables.</p>
+<div id="single-groups-s_group" class="section level2">
+<h2>Single groups (s_group)</h2>
+<p>An s_group is the grouping variables for a single row of data.</p>
+<p>You can make an <code>s_group</code> object using <code>make_s_group()</code>, and giving it a list with the group variables named. In this example we have a single sensor named 'TTP_058' from a raccoon, and an additional grouping variable of month (entered as its numeric interpretation).</p>
+<p>All grouping information is converted and stored as a character in the s_group.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">singlegroup &lt;-<span class="st"> </span><span class="kw">make_s_group</span>(<span class="kw">list</span>(<span class="dt">id=</span><span class="st">'TTP_058'</span>, <span class="dt">month =</span> <span class="dv">4</span>))
+<span class="kw">str</span>(singlegroup)</code></pre></div>
+<pre><code>## List of 2
+##  $ id   : chr &quot;TTP_058&quot;
+##  $ month: chr &quot;4&quot;
+##  - attr(*, &quot;class&quot;)= chr &quot;s_group&quot;</code></pre>
+<p>Because <code>s_group</code>s are simply lists, you can edit individual elements in an s_group</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">singlegroup </code></pre></div>
+<pre><code>## $id
+## [1] &quot;TTP_058&quot;
+## 
+## $month
+## [1] &quot;4&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">singlegroup[<span class="dv">1</span>] &lt;-<span class="st"> 'CJ15'</span>
+singlegroup$month &lt;-<span class="st"> '5'</span>
+<span class="kw">str</span>(singlegroup)</code></pre></div>
+<pre><code>## List of 2
+##  $ id   : chr &quot;CJ15&quot;
+##  $ month: chr &quot;5&quot;
+##  - attr(*, &quot;class&quot;)= chr &quot;s_group&quot;</code></pre>
+</div>
+<div id="column-groupings-c_grouping" class="section level2">
+<h2>Column groupings (c_grouping)</h2>
+<p>C_groupings are a collection of s_groups with the same grouping names and an 'active_group' which is a subset of all the available group names.</p>
+<p>Similarly to s_group you can make a c_grouping with <code>make_s_group</code>. The argument <code>x</code> takes a list where each element is a vector indicating the named groupings as well as a vector of the active groups.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">group_list &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">id =</span> <span class="kw">rep</span>(<span class="dv">1</span>:<span class="dv">2</span>,<span class="dv">10</span>), <span class="dt">year =</span> <span class="kw">rep</span>(<span class="dv">2020</span>, <span class="dv">10</span>))
+cg &lt;-<span class="st"> </span><span class="kw">make_c_grouping</span>(<span class="dt">x=</span>group_list, <span class="dt">active_group=</span><span class="kw">c</span>(<span class="st">'id'</span>,<span class="st">'year'</span>))
+<span class="kw">str</span>(cg)</code></pre></div>
+<pre><code>## c_grouping object 
+## List of 20
+##  $ :List of 2
+##   ..$ id  : chr &quot;1&quot;
+##   .. [list output truncated]
+##   ..- attr(*, &quot;class&quot;)= chr &quot;s_group&quot;
+##   [list output truncated]
+##  - attr(*, &quot;active_group&quot;)= chr [1:2] &quot;id&quot; &quot;year&quot;
+##  - attr(*, &quot;sort_index&quot;)= Factor w/ 2 levels &quot;1_2020&quot;,&quot;2_2020&quot;: 1 2 1 2 1 2 1 2 1 2 ...</code></pre>
+<p>You can also make a c_grouping by concatenating multiple s_groups. All <code>s_groups</code> must have the same names or an error is returned.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">make_s_group</span>(<span class="kw">list</span>(<span class="dt">id =</span> <span class="dv">1</span>, <span class="dt">year =</span> <span class="dv">2020</span>))
+b &lt;-<span class="st"> </span><span class="kw">make_s_group</span>(<span class="kw">list</span>(<span class="dt">id =</span> <span class="dv">1</span>, <span class="dt">year =</span> <span class="dv">2021</span>))
+c &lt;-<span class="st"> </span><span class="kw">make_s_group</span>(<span class="kw">list</span>(<span class="dt">id =</span> <span class="dv">2</span>, <span class="dt">year =</span> <span class="dv">2020</span>))
+cg &lt;-<span class="st"> </span><span class="kw">c</span>(a, b , c)</code></pre></div>
+<pre><code>## 1_2020 &amp; 1_2021 &amp; 2_2020 has only one relocation</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(cg)</code></pre></div>
+<pre><code>##                 1_2020                 1_2021                 2_2020 
+##                      1                      1                      1 
+## active_group: id, year 
+##                      0</code></pre>
+<p>You'll notice sftrack warns if any grouping combination only has one relocation. This may be relevant for different kinds of analysis where you need more than one point to consider a movement.</p>
+<p>You can also combine c_grouping together with <code>c()</code>. All names and active_groups must be the same.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cg_combine &lt;-<span class="st"> </span><span class="kw">c</span>(cg,cg)
+<span class="kw">summary</span>(cg_combine)</code></pre></div>
+<pre><code>##                 1_2020                 1_2021                 2_2020 
+##                      2                      2                      2 
+## active_group: id, year 
+##                      0</code></pre>
+<p>You can also edit groupings like a list, but you must replace it with an s_group object.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cg[<span class="dv">1</span>]</code></pre></div>
+<pre><code>## [[1]]
+## $id
+## [1] &quot;1&quot;
+## 
+## $year
+## [1] &quot;2020&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cg[<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="kw">make_s_group</span>(<span class="kw">list</span>(<span class="dt">id=</span><span class="dv">3</span>,<span class="dt">year=</span><span class="dv">2019</span>))</code></pre></div>
+<pre><code>## 1_2021 &amp; 2_2020 &amp; 3_2019 has only one relocation</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cg[<span class="dv">1</span>]</code></pre></div>
+<pre><code>## [[1]]
+## $id
+## [1] &quot;3&quot;
+## 
+## $year
+## [1] &quot;2019&quot;</code></pre>
+<p>And the group names must match the ones in the c_grouping or an error is returned</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Try to add an s_group with a month field when the original group had year instead </span>
+<span class="kw">try</span>( cg[<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="kw">make_s_group</span>(<span class="kw">list</span>(<span class="dt">id=</span><span class="dv">3</span>,<span class="dt">month=</span><span class="dv">2019</span>)) )</code></pre></div>
+</div>
+<div id="selecting-a-grouping" class="section level2">
+<h2>Selecting a grouping</h2>
+<p>As <code>c_groupings</code> are stored as lists, it can be difficult to refer to a single group or combination of groupings. This is where the sort_index can come in handy. The sort_index is a factor of the combined active_group variables for each row where paste(id, name1,name2,...,sep='_')). The sort index is remade every time the active group changes, and therefore can be used to subset. You can access the sort index using <code>group_labels()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">group_list &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">id =</span> <span class="kw">rep</span>(<span class="dv">1</span>:<span class="dv">2</span>,<span class="dv">10</span>), <span class="dt">year =</span> <span class="kw">rep</span>(<span class="dv">2020</span>, <span class="dv">10</span>))
+cg &lt;-<span class="st"> </span><span class="kw">make_c_grouping</span>(<span class="dt">x=</span>group_list, <span class="dt">active_group=</span><span class="kw">c</span>(<span class="st">'id'</span>,<span class="st">'year'</span>))
+<span class="kw">group_labels</span>(cg)[<span class="dv">1</span>:<span class="dv">10</span>]</code></pre></div>
+<pre><code>##  [1] 1_2020 2_2020 1_2020 2_2020 1_2020 2_2020 1_2020 2_2020 1_2020 2_2020
+## Levels: 1_2020 2_2020</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Subsetting a particular sensor from our raccoon data</span>
+
+<span class="kw">data</span>(<span class="st">'raccoon'</span>, <span class="dt">package =</span> <span class="st">'sftrack'</span>)
+raccoon$month &lt;-<span class="st"> </span><span class="kw">as.POSIXlt</span>(raccoon$timestamp)$mon<span class="dv">+1</span>
+
+raccoon$time &lt;-<span class="st"> </span><span class="kw">as.POSIXct</span>(raccoon$timestamp, <span class="dt">tz=</span><span class="st">'EST'</span>)
+coords =<span class="st"> </span><span class="kw">c</span>(<span class="st">'longitude'</span>,<span class="st">'latitude'</span>)
+group =<span class="st"> </span><span class="kw">list</span>(<span class="dt">id =</span> raccoon$animal_id, <span class="dt">month =</span> <span class="kw">as.POSIXlt</span>(raccoon$timestamp)$mon<span class="dv">+1</span>)
+time =<span class="st"> 'time'</span>
+
+my_sftraj &lt;-<span class="st"> </span><span class="kw">as_sftraj</span>(<span class="dt">data =</span> raccoon, <span class="dt">coords =</span> coords, <span class="dt">group =</span> group, <span class="dt">time =</span> time)
+<span class="kw">head</span>(my_sftraj[<span class="kw">group_labels</span>(my_sftraj) %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">'TTP-058_1'</span>), ])</code></pre></div>
+<pre><code>## Sftraj with 6 features and 12 fields (3 empty geometries) 
+## Geometry : &quot;geometry&quot; (XY, crs: NA) 
+## Timestamp : &quot;time&quot; (POSIXct in UTC) 
+## Grouping : &quot;sft_group&quot; (*id*, *month*) 
+## -------------------------------
+##   animal_id latitude longitude           timestamp height hdop vdop fix month
+## 1   TTP-058       NA        NA 2019-01-19 00:02:30     NA  0.0  0.0  NO     1
+## 2   TTP-058 26.06945 -80.27906 2019-01-19 01:02:30      7  6.2  3.2  2D     1
+## 3   TTP-058       NA        NA 2019-01-19 02:02:30     NA  0.0  0.0  NO     1
+## 4   TTP-058       NA        NA 2019-01-19 03:02:30     NA  0.0  0.0  NO     1
+## 5   TTP-058 26.06769 -80.27431 2019-01-19 04:02:30    858  5.1  3.2  2D     1
+## 6   TTP-058 26.06867 -80.27930 2019-01-19 05:02:30    350  1.9  3.2  3D     1
+##                  time               sft_group                       geometry
+## 1 2019-01-19 00:02:30 (id: TTP-058, month: 1)                    POINT EMPTY
+## 2 2019-01-19 01:02:30 (id: TTP-058, month: 1)     POINT (-80.27906 26.06945)
+## 3 2019-01-19 02:02:30 (id: TTP-058, month: 1)                    POINT EMPTY
+## 4 2019-01-19 03:02:30 (id: TTP-058, month: 1)                    POINT EMPTY
+## 5 2019-01-19 04:02:30 (id: TTP-058, month: 1) LINESTRING (-80.27431 26.06...
+## 6 2019-01-19 05:02:30 (id: TTP-058, month: 1) LINESTRING (-80.2793 26.068...</code></pre>
+<p>You can also subset by entering the group label of the group itself in either the c_grouping or the sftrack/sftraj object:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(cg[<span class="st">'1_2020'</span>])</code></pre></div>
+<pre><code>## [[1]]
+## $id
+## [1] &quot;1&quot;
+## 
+## $year
+## [1] &quot;2020&quot;
+## 
+## 
+## [[2]]
+## $id
+## [1] &quot;1&quot;
+## 
+## $year
+## [1] &quot;2020&quot;
+## 
+## 
+## [[3]]
+## $id
+## [1] &quot;1&quot;
+## 
+## $year
+## [1] &quot;2020&quot;
+## 
+## 
+## [[4]]
+## $id
+## [1] &quot;1&quot;
+## 
+## $year
+## [1] &quot;2020&quot;
+## 
+## 
+## [[5]]
+## $id
+## [1] &quot;1&quot;
+## 
+## $year
+## [1] &quot;2020&quot;
+## 
+## 
+## [[6]]
+## $id
+## [1] &quot;1&quot;
+## 
+## $year
+## [1] &quot;2020&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sub &lt;-<span class="st"> </span>my_sftraj[<span class="st">'TTP-058_1'</span>,]
+<span class="kw">print</span>(sub,<span class="dv">5</span>, <span class="dv">3</span>)</code></pre></div>
+<pre><code>## Sftraj with 207 features and 12 fields (64 empty geometries) 
+## Geometry : &quot;geometry&quot; (XY, crs: NA) 
+## Timestamp : &quot;time&quot; (POSIXct in UTC) 
+## Grouping : &quot;sft_group&quot; (*id*, *month*) 
+## -------------------------------
+##   animal_id latitude longitude ...               sft_group
+## 1   TTP-058       NA        NA ... (id: TTP-058, month: 1)
+## 2   TTP-058 26.06945 -80.27906 ... (id: TTP-058, month: 1)
+## 3   TTP-058       NA        NA ... (id: TTP-058, month: 1)
+## 4   TTP-058       NA        NA ... (id: TTP-058, month: 1)
+## 5   TTP-058 26.06769 -80.27431 ... (id: TTP-058, month: 1)
+##                         geometry                time
+## 1                    POINT EMPTY 2019-01-19 00:02:30
+## 2     POINT (-80.27906 26.06945) 2019-01-19 01:02:30
+## 3                    POINT EMPTY 2019-01-19 02:02:30
+## 4                    POINT EMPTY 2019-01-19 03:02:30
+## 5 LINESTRING (-80.27431 26.06... 2019-01-19 04:02:30</code></pre>
+<p>You can refer to the levels of the sort index using <code>group_names</code>, this returns levels() of the sort index.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">group_names</span>(cg)</code></pre></div>
+<pre><code>## [1] &quot;1_2020&quot; &quot;2_2020&quot;</code></pre>
+</div>
+<div id="active-group" class="section level2">
+<h2>Active group</h2>
+<p>The active_group is a simple yet powerful feature. It dictates how your data is grouped for essentially all calculations. It can also be changed on the fly. You can view and change the active group of a column grouping with <code>active_group()</code>. Once changed, it recalculates the sort_index and in some cases recalculates the geometries.</p>
+<p>Active groups can be changed for any sftrack/straj/c_grouping</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># sftrack</span>
+<span class="kw">active_group</span>(my_sftraj)</code></pre></div>
+<pre><code>## [1] &quot;id&quot;    &quot;month&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(my_sftraj, <span class="dt">stats =</span> T)</code></pre></div>
+<pre><code>##       group points NAs          begin_time            end_time     length_m
+## 1 TTP-041_1    208   0 2019-01-19 00:02:30 2019-01-31 23:02:30 0.0533572052
+## 2 TTP-041_2     15   0 2019-02-01 00:02:30 2019-02-01 23:02:07 0.0001556664
+## 3 TTP-058_1    207   0 2019-01-19 00:02:30 2019-01-31 23:02:30 0.1779383524
+## 4 TTP-058_2     15   0 2019-02-01 00:02:30 2019-02-01 23:02:30 0.0115635197</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># change the active group to id only</span>
+<span class="kw">active_group</span>(my_sftraj) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">'id'</span>)
+<span class="kw">active_group</span>(my_sftraj)</code></pre></div>
+<pre><code>## [1] &quot;id&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(my_sftraj, <span class="dt">stats =</span> T)</code></pre></div>
+<pre><code>##     group points NAs          begin_time            end_time   length_m
+## 1 TTP-041    223   0 2019-01-19 00:02:30 2019-02-01 23:02:07 0.05351287
+## 2 TTP-058    222   0 2019-01-19 00:02:30 2019-02-01 23:02:30 0.18950187</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># column groupings work the same way</span>
+<span class="kw">active_group</span>(cg)</code></pre></div>
+<pre><code>## [1] &quot;id&quot;   &quot;year&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">active_group</span>(cg) &lt;-<span class="st"> 'id'</span>
+<span class="kw">active_group</span>(cg)</code></pre></div>
+<pre><code>## [1] &quot;id&quot;</code></pre>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
