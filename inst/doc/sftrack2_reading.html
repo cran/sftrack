@@ -12,47 +12,92 @@
 
 
 
-<title></title>
+<title>2. Reading in an sftrack</title>
+
+<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 
-
-<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
 <style type="text/css" data-origin="pandoc">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 
 </style>
 <script>
@@ -79,7 +124,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 
-<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
 
 
 
@@ -91,9 +137,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 
-<h1 class="title toc-ignore"><ol start="2" style="list-style-type: decimal">
-<li>Reading in an sftrack</li>
-</ol></h1>
+<h1 class="title toc-ignore">2. Reading in an sftrack</h1>
 
 
 
@@ -102,7 +146,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2>Loading in raw data</h2>
 <p>To create <code>sftrack</code> objects data we use the <code>as_sftrack()</code> (track) or <code>as_sftraj()</code> (trajectory) function, depending on your desired output. Both have the same arguments but differ in the way the geometry field is calculated.</p>
 <div id="vector-vs.-data.frame-inputs" class="section level3">
-<h3>Vector vs. data.frame inputs</h3>
+<h3>Vector vs. data.frame inputs</h3>
 <p><code>as_sftrack()/as_sftraj</code> accepts 2 kinds of raw data for each of the 4 required parts. Either a vector/list representing the data where length = nrow(data), or the column name where the data exists. For any <code>sftrack</code> component you can input either vector data or the column name for any variable, and can mix types between arguments.</p>
 <p><strong>Vector</strong> inputs to <code>as_sftrack</code> generally involve feeding as_sftrack the data itself where length(vector) == nrow(data). Or a list where each component adheres to this rule. If using entirely vector inputs for grouping, geometry, time, and error then <code>data</code> is not required.</p>
 <p><strong>data.frame</strong> inputs on the other hand are simply character vectors describing the column name in <code>data</code> where the information is found.</p>
@@ -115,33 +159,33 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><strong>time</strong> (required) - Time information in either <code>POSIXct</code> or as an <code>integer</code>. Accepts either a vector of time, or the column name found in <code>data</code>. The outputted object will be sorted by the time column.</p>
 <p><strong>error</strong> - Error information for the associated xyz point. Accepts either a vector of the error, or the column name found in <code>data</code>. If not given, default = NA.</p>
 <p><strong>crs</strong> - the coordinate references system/projection of the data, as implemented by rgdal. see ?rgdal::<code>CRS-class</code> for more information. If none is supplied crs is set as NA and can be set later using <code>sf::st_crs()</code> from <code>sf</code>.</p>
-<p><strong>active_group</strong> (required) - This is a vector containing what groups are 'active'. Meaning calculations and graphing will use these groupings. If no value is supplied it defaults to all grouping variables. Can change active_group later using <code>active_group() &lt;- 'myvalue'</code>.</p>
+<p><strong>active_group</strong> (required) - This is a vector containing what groups are ‘active’. Meaning calculations and graphing will use these groupings. If no value is supplied it defaults to all grouping variables. Can change active_group later using <code>active_group() &lt;- &#39;myvalue&#39;</code>.</p>
 </div>
 <div id="vector-inputs" class="section level3">
 <h3>Vector inputs</h3>
-<p>In the case of vector inputs, the vectors are cbinded to <code>data</code> if data is supplied. Sftrack returns an error if the column name already exists in the data.frame and <code>overwrite_names</code> remains FALSE. Default column names are: group = 'sft_group', time = 'sft_timestamp', error = 'sft_error'. Names can be overwitten using <code>overwrite_names = TRUE</code>. At present Geometry defaults as 'Geometry' and at present can be changed later via <code>sf</code> but not via <code>sftrack</code> as we make a new sf object when we make an sftrack object.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;sftrack&quot;</span>)
-
-<span class="co">#data</span>
-<span class="kw">data</span>(<span class="st">'raccoon'</span>, <span class="dt">package =</span> <span class="st">'sftrack'</span>)
-
-<span class="co">#xyz</span>
-coords =<span class="st"> </span>raccoon[,<span class="kw">c</span>(<span class="st">'longitude'</span>,<span class="st">'latitude'</span>)]
-crs =<span class="st"> '+init=epsg:4326'</span>
-<span class="co">#groupings</span>
-group =<span class="st"> </span><span class="kw">list</span>(<span class="dt">id =</span> raccoon$animal_id,<span class="dt">month =</span> <span class="kw">as.POSIXlt</span>(raccoon$timestamp)$mon<span class="dv">+1</span>)
-active_group =<span class="st"> </span><span class="kw">c</span>(<span class="st">'id'</span>,<span class="st">'month'</span>)
-<span class="co">#time</span>
-time =<span class="st"> </span><span class="kw">as.POSIXct</span>(raccoon$timestamp, <span class="dt">tz=</span><span class="st">'EST'</span>)
-<span class="co">#error</span>
-error =<span class="st"> </span>raccoon$fix
-my_sftrack &lt;-<span class="st"> </span><span class="kw">as_sftrack</span>(<span class="dt">data =</span> raccoon, <span class="dt">coords =</span> coords, <span class="dt">group =</span> group, 
-                         <span class="dt">active_group =</span> active_group, <span class="dt">time =</span> time, 
-                         <span class="dt">crs =</span> crs, <span class="dt">error =</span> error)
-
-<span class="kw">head</span>(my_sftrack)</code></pre></div>
+<p>In the case of vector inputs, the vectors are cbinded to <code>data</code> if data is supplied. Sftrack returns an error if the column name already exists in the data.frame and <code>overwrite_names</code> remains FALSE. Default column names are: group = ‘sft_group’, time = ‘sft_timestamp’, error = ‘sft_error’. Names can be overwitten using <code>overwrite_names = TRUE</code>. At present Geometry defaults as ‘Geometry’ and at present can be changed later via <code>sf</code> but not via <code>sftrack</code> as we make a new sf object when we make an sftrack object.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;sftrack&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#data</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&#39;raccoon&#39;</span>, <span class="at">package =</span> <span class="st">&#39;sftrack&#39;</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#xyz</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">=</span> raccoon[,<span class="fu">c</span>(<span class="st">&#39;longitude&#39;</span>,<span class="st">&#39;latitude&#39;</span>)]</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>crs <span class="ot">=</span> <span class="st">&#39;+init=epsg:4326&#39;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#groupings</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>group <span class="ot">=</span> <span class="fu">list</span>(<span class="at">id =</span> raccoon<span class="sc">$</span>animal_id,<span class="at">month =</span> <span class="fu">as.POSIXlt</span>(raccoon<span class="sc">$</span>timestamp)<span class="sc">$</span>mon<span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>active_group <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;id&#39;</span>,<span class="st">&#39;month&#39;</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">#time</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>time <span class="ot">=</span> <span class="fu">as.POSIXct</span>(raccoon<span class="sc">$</span>timestamp, <span class="at">tz=</span><span class="st">&#39;EST&#39;</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">#error</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>error <span class="ot">=</span> raccoon<span class="sc">$</span>fix</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>my_sftrack <span class="ot">&lt;-</span> <span class="fu">as_sftrack</span>(<span class="at">data =</span> raccoon, <span class="at">coords =</span> coords, <span class="at">group =</span> group, </span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>                         <span class="at">active_group =</span> active_group, <span class="at">time =</span> time, </span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>                         <span class="at">crs =</span> crs, <span class="at">error =</span> error)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my_sftrack)</span></code></pre></div>
 <pre><code>## Sftrack with 6 features and 12 fields (3 empty geometries) 
-## Geometry : &quot;geometry&quot; (XY, crs: +init=epsg:4326) 
+## Geometry : &quot;geometry&quot; (XY, crs: WGS 84) 
 ## Timestamp : &quot;sft_timestamp&quot; (POSIXct in UTC) 
 ## Groupings : &quot;sft_group&quot; (*id*, *month*) 
 ## -------------------------------
@@ -172,17 +216,17 @@ my_sftrack &lt;-<span class="st"> </span><span class="kw">as_sftrack</span>(<spa
 <div id="data.frame-inputs" class="section level3">
 <h3>data.frame inputs</h3>
 <p>Data.frame inputs generally describe the columns that represent the variables in <code>data</code>. If the columns are not found in <code>data</code>, an error is returned.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">raccoon$time &lt;-<span class="st"> </span><span class="kw">as.POSIXct</span>(raccoon$timestamp, <span class="dt">tz=</span><span class="st">'EST'</span>)
-raccoon$month &lt;-<span class="st"> </span><span class="kw">as.POSIXlt</span>(raccoon$timestamp)$mon<span class="dv">+1</span>
-
-coords =<span class="st"> </span><span class="kw">c</span>(<span class="st">'longitude'</span>,<span class="st">'latitude'</span>)
-group =<span class="st"> </span><span class="kw">c</span>(<span class="dt">id =</span> <span class="st">'animal_id'</span>, <span class="dt">month =</span> <span class="st">'month'</span>)
-time =<span class="st"> 'time'</span>
-error =<span class="st"> 'fix'</span>
-
-my_sftraj &lt;-<span class="st"> </span><span class="kw">as_sftraj</span>(<span class="dt">data =</span> raccoon, <span class="dt">coords =</span> coords, <span class="dt">group =</span> group, <span class="dt">time =</span> time, <span class="dt">error =</span> error)
-
-<span class="kw">head</span>(my_sftraj)</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>raccoon<span class="sc">$</span>time <span class="ot">&lt;-</span> <span class="fu">as.POSIXct</span>(raccoon<span class="sc">$</span>timestamp, <span class="at">tz=</span><span class="st">&#39;EST&#39;</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>raccoon<span class="sc">$</span>month <span class="ot">&lt;-</span> <span class="fu">as.POSIXlt</span>(raccoon<span class="sc">$</span>timestamp)<span class="sc">$</span>mon<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;longitude&#39;</span>,<span class="st">&#39;latitude&#39;</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>group <span class="ot">=</span> <span class="fu">c</span>(<span class="at">id =</span> <span class="st">&#39;animal_id&#39;</span>, <span class="at">month =</span> <span class="st">&#39;month&#39;</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>time <span class="ot">=</span> <span class="st">&#39;time&#39;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>error <span class="ot">=</span> <span class="st">&#39;fix&#39;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>my_sftraj <span class="ot">&lt;-</span> <span class="fu">as_sftraj</span>(<span class="at">data =</span> raccoon, <span class="at">coords =</span> coords, <span class="at">group =</span> group, <span class="at">time =</span> time, <span class="at">error =</span> error)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my_sftraj)</span></code></pre></div>
 <pre><code>## Sftraj with 6 features and 12 fields (3 empty geometries) 
 ## Geometry : &quot;geometry&quot; (XY, crs: NA) 
 ## Timestamp : &quot;time&quot; (POSIXct in UTC) 
@@ -216,15 +260,15 @@ my_sftraj &lt;-<span class="st"> </span><span class="kw">as_sftraj</span>(<span 
 <p><code>as_sftrack()</code> and <code>as_sftraj()</code> also accept other data types, but the arguments for each differ depending on the class its converting from. It currently accepts, <code>sf</code>, <code>ltraj</code> (from adehabitatLT), and eventually <code>tibbles</code> (tidyverse) and <code>track</code> (trajectories).</p>
 <div id="import-from-ltraj" class="section level3">
 <h3>Import from ltraj</h3>
-<p>To read in an ltraj object all you need is an ltraj object created in <code>adehabitatLT</code>. All relevant information is taken from the object. The burst as defined in an ltraj is slightly different than sftracks groupings, so it assumes the ltraj 'burst' is the <code>id</code> field of the sftrack grouping object.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;adehabitatLT&quot;</span>)
-
-ltraj_df &lt;-<span class="st"> </span><span class="kw">as.ltraj</span>(<span class="dt">xy=</span>raccoon[,<span class="kw">c</span>(<span class="st">'longitude'</span>,<span class="st">'latitude'</span>)], <span class="dt">date =</span> <span class="kw">as.POSIXct</span>(raccoon$timestamp),
- <span class="dt">id =</span> raccoon$animal_id, <span class="dt">typeII =</span> <span class="ot">TRUE</span>,
- <span class="dt">infolocs =</span> raccoon[,<span class="dv">1</span>:<span class="dv">6</span>] )
-
-my_sf &lt;-<span class="st"> </span><span class="kw">as_sftrack</span>(ltraj_df)
-<span class="kw">head</span>(my_sf)</code></pre></div>
+<p>To read in an ltraj object all you need is an ltraj object created in <code>adehabitatLT</code>. All relevant information is taken from the object. The burst as defined in an ltraj is slightly different than sftracks groupings, so it assumes the ltraj ‘burst’ is the <code>id</code> field of the sftrack grouping object.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;adehabitatLT&quot;</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>ltraj_df <span class="ot">&lt;-</span> <span class="fu">as.ltraj</span>(<span class="at">xy=</span>raccoon[,<span class="fu">c</span>(<span class="st">&#39;longitude&#39;</span>,<span class="st">&#39;latitude&#39;</span>)], <span class="at">date =</span> <span class="fu">as.POSIXct</span>(raccoon<span class="sc">$</span>timestamp),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a> <span class="at">id =</span> raccoon<span class="sc">$</span>animal_id, <span class="at">typeII =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a> <span class="at">infolocs =</span> raccoon[,<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>] )</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>my_sf <span class="ot">&lt;-</span> <span class="fu">as_sftrack</span>(ltraj_df)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my_sf)</span></code></pre></div>
 <pre><code>## Sftrack with 6 features and 12 fields (1 empty geometries) 
 ## Geometry : &quot;geometry&quot; (XY, crs: NA) 
 ## Timestamp : &quot;sft_timestamp&quot; (POSIXct in UTC) 
@@ -248,17 +292,17 @@ my_sf &lt;-<span class="st"> </span><span class="kw">as_sftrack</span>(ltraj_df)
 <div id="sf-objects" class="section level3">
 <h3>sf objects</h3>
 <p><code>sf</code> objects are handled similarly as data.frame inputs except you do not need to input any information about the coordinates or projection. Grouping and time are still required. The sf spatial object must be in an <code>sfc_POINT</code> column.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;sf&quot;</span>)</code></pre></div>
-<pre><code>## Linking to GEOS 3.6.2, GDAL 2.1.2, PROJ 4.9.3</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df1 &lt;-<span class="st"> </span>raccoon[!<span class="kw">is.na</span>(raccoon$latitude),]
-sf_df &lt;-<span class="st"> </span><span class="kw">st_as_sf</span>(df1, <span class="dt">coords=</span><span class="kw">c</span>(<span class="st">'longitude'</span>,<span class="st">'latitude'</span>), <span class="dt">crs =</span> crs)
-group =<span class="st"> </span><span class="kw">c</span>(<span class="dt">id =</span> <span class="st">'animal_id'</span>)
-time_col =<span class="st"> 'time'</span>
-
-new_sftraj &lt;-<span class="st"> </span><span class="kw">as_sftraj</span>(sf_df, <span class="dt">group =</span> group, <span class="dt">time =</span> time_col) 
-<span class="kw">head</span>(new_sftraj)</code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;sf&quot;</span>)</span></code></pre></div>
+<pre><code>## Linking to GEOS 3.9.0, GDAL 3.2.2, PROJ 7.2.1</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> raccoon[<span class="sc">!</span><span class="fu">is.na</span>(raccoon<span class="sc">$</span>latitude),]</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>sf_df <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(df1, <span class="at">coords=</span><span class="fu">c</span>(<span class="st">&#39;longitude&#39;</span>,<span class="st">&#39;latitude&#39;</span>), <span class="at">crs =</span> crs)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>group <span class="ot">=</span> <span class="fu">c</span>(<span class="at">id =</span> <span class="st">&#39;animal_id&#39;</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>time_col <span class="ot">=</span> <span class="st">&#39;time&#39;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>new_sftraj <span class="ot">&lt;-</span> <span class="fu">as_sftraj</span>(sf_df, <span class="at">group =</span> group, <span class="at">time =</span> time_col) </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(new_sftraj)</span></code></pre></div>
 <pre><code>## Sftrack with 6 features and 10 fields (0 empty geometries) 
-## Geometry : &quot;geometry&quot; (XY, crs: +init=epsg:4326) 
+## Geometry : &quot;geometry&quot; (XY, crs: WGS 84) 
 ## Timestamp : &quot;time&quot; (POSIXct in UTC) 
 ## Groupings : &quot;sft_group&quot; (*id*) 
 ## -------------------------------
@@ -276,10 +320,10 @@ new_sftraj &lt;-<span class="st"> </span><span class="kw">as_sftraj</span>(sf_df
 ## 7  (id: TTP-058) LINESTRING (-80.27908 26.06...
 ## 8  (id: TTP-058) LINESTRING (-80.27902 26.06...
 ## 10 (id: TTP-058) LINESTRING (-80.279 26.0698...</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">new_sftrack &lt;-<span class="st"> </span><span class="kw">as_sftrack</span>(sf_df, <span class="dt">group =</span> group, <span class="dt">time=</span> time_col) 
-<span class="kw">head</span>(new_sftrack)</code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>new_sftrack <span class="ot">&lt;-</span> <span class="fu">as_sftrack</span>(sf_df, <span class="at">group =</span> group, <span class="at">time=</span> time_col) </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(new_sftrack)</span></code></pre></div>
 <pre><code>## Sftrack with 6 features and 10 fields (0 empty geometries) 
-## Geometry : &quot;geometry&quot; (XY, crs: +init=epsg:4326) 
+## Geometry : &quot;geometry&quot; (XY, crs: WGS 84) 
 ## Timestamp : &quot;time&quot; (POSIXct in UTC) 
 ## Groupings : &quot;sft_group&quot; (*id*) 
 ## -------------------------------
@@ -301,37 +345,39 @@ new_sftraj &lt;-<span class="st"> </span><span class="kw">as_sftraj</span>(sf_df
 <div id="intra-package-conversion-between-classes" class="section level3">
 <h3>Intra-package conversion between classes</h3>
 <p>Additionally <code>as_sftrack</code> and <code>as_sftraj</code> can convert back and forth between classes with no loss in information.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make tracks from raw data</span>
-coords =<span class="st"> </span><span class="kw">c</span>(<span class="st">'longitude'</span>,<span class="st">'latitude'</span>)
-group =<span class="st"> </span><span class="kw">c</span>(<span class="dt">id =</span> <span class="st">'animal_id'</span>, <span class="dt">month =</span> <span class="st">'month'</span>)
-time =<span class="st"> 'time'</span>
-error =<span class="st"> 'fix'</span>
-
-my_sftraj &lt;-<span class="st"> </span><span class="kw">as_sftraj</span>(<span class="dt">data =</span> raccoon, <span class="dt">coords =</span> coords, <span class="dt">group =</span> group, <span class="dt">time =</span> time, <span class="dt">error =</span> error)
-my_sftrack &lt;-<span class="st"> </span><span class="kw">as_sftrack</span>(<span class="dt">data =</span> raccoon, <span class="dt">coords =</span> coords, <span class="dt">group =</span> group, <span class="dt">time =</span> time, <span class="dt">error =</span> error)
-
-<span class="co"># Convert between types</span>
-new_sftrack &lt;-<span class="st"> </span><span class="kw">as_sftrack</span>(my_sftraj)
-<span class="co">#head(new_sftrack)</span>
-new_sftraj &lt;-<span class="st"> </span><span class="kw">as_sftraj</span>(my_sftrack)
-<span class="co">#head(new_sftraj)</span>
-
-<span class="kw">identical</span>(my_sftraj,new_sftraj)</code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make tracks from raw data</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;longitude&#39;</span>,<span class="st">&#39;latitude&#39;</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>group <span class="ot">=</span> <span class="fu">c</span>(<span class="at">id =</span> <span class="st">&#39;animal_id&#39;</span>, <span class="at">month =</span> <span class="st">&#39;month&#39;</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>time <span class="ot">=</span> <span class="st">&#39;time&#39;</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>error <span class="ot">=</span> <span class="st">&#39;fix&#39;</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>my_sftraj <span class="ot">&lt;-</span> <span class="fu">as_sftraj</span>(<span class="at">data =</span> raccoon, <span class="at">coords =</span> coords, <span class="at">group =</span> group, <span class="at">time =</span> time, <span class="at">error =</span> error)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>my_sftrack <span class="ot">&lt;-</span> <span class="fu">as_sftrack</span>(<span class="at">data =</span> raccoon, <span class="at">coords =</span> coords, <span class="at">group =</span> group, <span class="at">time =</span> time, <span class="at">error =</span> error)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert between types</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>new_sftrack <span class="ot">&lt;-</span> <span class="fu">as_sftrack</span>(my_sftraj)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co">#head(new_sftrack)</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>new_sftraj <span class="ot">&lt;-</span> <span class="fu">as_sftraj</span>(my_sftrack)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co">#head(new_sftraj)</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(my_sftraj,new_sftraj)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">identical</span>(my_sftrack,new_sftrack)</code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(my_sftrack,new_sftrack)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 </div>
 <div id="duplicated-data" class="section level3">
 <h3>Duplicated data</h3>
 <p>A common issue with movement data is when duplicated gps time stamps are logged for a sensor. When this happens it can be impossible for <code>sftrack</code> to know which point to use. For this reason, sftrack returns an error if any <code>grouping</code> + <code>time</code> combinations are duplicated.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">raccoon$time[<span class="dv">1</span>] &lt;-<span class="st"> </span>raccoon$time[<span class="dv">2</span>]
- <span class="kw">try</span>(<span class="kw">as_sftrack</span>(<span class="dt">data =</span> raccoon, <span class="dt">coords =</span> coords, <span class="dt">group =</span> group, <span class="dt">time =</span> time, <span class="dt">error =</span> error))</code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>raccoon<span class="sc">$</span>time[<span class="dv">1</span>] <span class="ot">&lt;-</span> raccoon<span class="sc">$</span>time[<span class="dv">2</span>]</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">try</span>(<span class="fu">as_sftrack</span>(<span class="at">data =</span> raccoon, <span class="at">coords =</span> coords, <span class="at">group =</span> group, <span class="at">time =</span> time, <span class="at">error =</span> error))</span></code></pre></div>
+<pre><code>## Error in dup_timestamp(time = data[[time_col]], x = group) : 
+##   groups: TTP-058_1 have duplicated time stamps</code></pre>
 <p>To help determine which rows are duplicated you can use the <code>which_duplicated</code> function to check your inputs. After which you can delete the superfluous rows and try again:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">which_duplicated</span>(<span class="dt">data =</span> raccoon , <span class="dt">group =</span> group, <span class="dt">time =</span> time)</code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which_duplicated</span>(<span class="at">data =</span> raccoon , <span class="at">group =</span> group, <span class="at">time =</span> time)</span></code></pre></div>
 <pre><code>##       group                time which_row
 ## 1 TTP-041_1 2019-01-19 02:02:22       225</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">raccoon &lt;-<span class="st"> </span>raccoon[-<span class="dv">2</span>,]
-my_sftrack &lt;-<span class="st"> </span><span class="kw">as_sftrack</span>(<span class="dt">data =</span> raccoon, <span class="dt">coords =</span> coords, <span class="dt">group =</span> group, <span class="dt">time =</span> time, <span class="dt">error =</span> error)</code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>raccoon <span class="ot">&lt;-</span> raccoon[<span class="sc">-</span><span class="dv">2</span>,]</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>my_sftrack <span class="ot">&lt;-</span> <span class="fu">as_sftrack</span>(<span class="at">data =</span> raccoon, <span class="at">coords =</span> coords, <span class="at">group =</span> group, <span class="at">time =</span> time, <span class="at">error =</span> error)</span></code></pre></div>
 </div>
 </div>
 

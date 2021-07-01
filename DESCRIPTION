@@ -1,7 +1,7 @@
 Package: sftrack
 Title: Modern Classes for Tracking and Movement Data
-Version: 0.5.2
-Date: 2020-10-19
+Version: 0.5.3
+Date: 2021-07-01
 Authors@R: 
     c(person(given = "Matthew",
              family = "Boone",
@@ -11,7 +11,7 @@ Authors@R:
       person(given = "Rocío",
              family = "Joo",
              role = "aut",
-             email = "rocio.joo@ufl.edu",
+             email = "rocio.joo@globalfishingwatch.org",
              comment = structure("0000-0003-0319-4210", .Names = "ORCID")),
       # person(given = "Clement",
       #        family = "Calenge",
@@ -25,7 +25,7 @@ Authors@R:
       person(given = "Mathieu",
              family = "Basille",
              role = c("aut", "cre"),
-             email = "basille@ufl.edu",
+             email = "mathieu@basille.org",
              comment = structure("0000-0001-9366-7127", .Names = "ORCID")))
 Depends: R (>= 3.2.0)
 Imports: sf
@@ -50,11 +50,11 @@ BugReports: https://github.com/mablab/sftrack/issues
 Suggests: testthat (>= 2.1.0), utils, ggplot2, adehabitatLT, knitr,
         geosphere, scales, covr, rmarkdown, lwgeom
 NeedsCompilation: no
-Packaged: 2020-10-30 02:50:11 UTC; mathieu
+Packaged: 2021-07-01 12:26:00 UTC; mathieu
 Author: Matthew Boone [aut] (<https://orcid.org/0000-0002-8070-4715>),
   Rocío Joo [aut] (<https://orcid.org/0000-0003-0319-4210>),
   Emiel Van Loon [ctb] (<https://orcid.org/0000-0002-8895-0427>),
   Mathieu Basille [aut, cre] (<https://orcid.org/0000-0001-9366-7127>)
-Maintainer: Mathieu Basille <basille@ufl.edu>
+Maintainer: Mathieu Basille <mathieu@basille.org>
 Repository: CRAN
-Date/Publication: 2020-11-05 09:10:02 UTC
+Date/Publication: 2021-07-01 15:50:02 UTC
